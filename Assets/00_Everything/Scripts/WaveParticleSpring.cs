@@ -34,7 +34,7 @@ public class WaveParticleSpring : MonoBehaviour {
 		Vector3 forceToAdd = - spring * ( posDiff.magnitude - targetDistance ) * (posDiff.normalized) - (damp * relVel);
 //		Debug.Log(forceToAdd);
 		if (!float.IsNaN(forceToAdd.x) && !float.IsNaN(forceToAdd.y) && !float.IsNaN(forceToAdd.z))
-			rigidbody.AddForce(forceToAdd);
+			rigidbody.AddForce(forceToAdd); 
 
 	}
 }

@@ -2,6 +2,8 @@ Temp/
 Obj/
 UnityGenerated/
 /Library/
+Vectrosity/
+Plugins/
 
 *.psd
 *.psd.meta

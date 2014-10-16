@@ -7,5 +7,6 @@ UnityGenerated/
 *.psd.meta
 *.sln
 *.userprefs
+*.unityproj
 
 *.csproj

@@ -23,7 +23,7 @@ public class WaterHeightSpring : MonoBehaviour {
 		Vector3 forceToAdd =  - spring * posDiff - damp * rigidbody.GetRelativePointVelocity(new Vector3 (0,waterHeight,0));
 		if (transform.position.y < waterHeight)
 		{
-			Debug.Log ("below water");
+//			Debug.Log ("below water");
 			forceToAdd = new Vector3(0,forceToAdd.y,0);
 			rigidbody.AddForce(forceToAdd);
 		}

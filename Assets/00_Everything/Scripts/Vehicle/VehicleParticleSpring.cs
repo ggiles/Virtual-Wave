@@ -40,8 +40,12 @@ public class VehicleParticleSpring : MonoBehaviour {
 		for (int i = 0; i < targetObjects.Length; i++)
 		{
 			Vector3 forceToAdd = - spring * ( posDiff.magnitude - targetDistances[i] ) * (posDiff.normalized) - (damp * relVel);
+			// torque calculation
+			Vector3 torqueToAdd = Vector3.Cross(forceToAdd, (rigidbody.position - rigidbody.worldCenterOfMass));
 			if (!float.IsNaN(forceToAdd.x) && !float.IsNaN(forceToAdd.y) && !float.IsNaN(forceToAdd.z))
 				rigidbody.AddForce(forceToAdd); 
+			// torque
+				rigidbody.AddTorque(torqueToAdd);
 		}
 
 	}

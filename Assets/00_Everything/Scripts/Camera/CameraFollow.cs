@@ -2,7 +2,6 @@
 
 public class CameraFollow : MonoBehaviour 
 {
-
 	public Transform target;									//object camera will focus on and follow
 	public Vector3 targetOffset =  new Vector3(0f, 3.5f, 7);	//how far back should camera be from the lookTarget
 	public bool lockRotation;									//should the camera be fixed at the offset (for example: following behind the player)
@@ -15,21 +14,10 @@ public class CameraFollow : MonoBehaviour
 	
 	private Transform followTarget;
 	private bool camColliding;
-
-
-	GameObject playersParent;
-
-
-
-
+	
 	//setup objects
 	void Awake()
 	{
-
-
-//		InputManager.AttachDevice( new UnityInputDevice (new EdwonInControlProfile()));
-
-
 		followTarget = new GameObject().transform;	//create empty gameObject as camera target, this will follow and rotate around the player
 		followTarget.name = "Camera Target";
 		if(waterFilter)
@@ -45,17 +33,6 @@ public class CameraFollow : MonoBehaviour
 	//run our camera functions each frame
 	void Update()
 	{
-		// WORKING ON CAMERA TRACKING OF BOTH PLAYERS
-//		for (int i = 0; i < playersParent.transform.childCount ; i++)
-//		{
-//			playersBounds.Encapsulate(players[i].transform.position);
-//		}
-//		Debug.Log(playersBounds.center);
-
-
-
-
-
 		if (!target)
 			return;
 		
@@ -96,20 +73,20 @@ public class CameraFollow : MonoBehaviour
 		if (lockRotation)
 			followTarget.rotation = target.rotation;
 		
-//		if(mouseFreelook)
-//		{
-//			//mouse look
-//			float axisX = Input.GetAxis ("Mouse X") * inputRotationSpeed * Time.deltaTime;
-//			followTarget.RotateAround (target.position,Vector3.up, axisX);
-//			float axisY = Input.GetAxis ("Mouse Y") * inputRotationSpeed * Time.deltaTime;
-//			followTarget.RotateAround (target.position, transform.right, -axisY);
-//		}
-//		else if (gameManager.singlePlayer == false)
-//		{
+		if(mouseFreelook)
+		{
+			//mouse look
+			float axisX = Input.GetAxis ("Mouse X") * inputRotationSpeed * Time.deltaTime;
+			followTarget.RotateAround (target.position,Vector3.up, axisX);
+			float axisY = Input.GetAxis ("Mouse Y") * inputRotationSpeed * Time.deltaTime;
+			followTarget.RotateAround (target.position, transform.right, -axisY);
+		}
+		else
+		{
 			//keyboard camera rotation look
-
-		followTarget.RotateAround (target.position, Vector3.up, 0);
-//		}
+			float axis = Input.GetAxis ("CamHorizontal") * inputRotationSpeed * Time.deltaTime;
+			followTarget.RotateAround (target.position, Vector3.up, axis);
+		}
 		
 		//where should the camera be next frame?
 		Vector3 nextFramePosition = Vector3.Lerp(transform.position, followTarget.position, followSpeed * Time.deltaTime);

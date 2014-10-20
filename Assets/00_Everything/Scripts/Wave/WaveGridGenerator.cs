@@ -4,7 +4,7 @@ using Vectrosity;
 
 public class WaveGridGenerator : MonoBehaviour {
 
-	public GameObject vehicleParticle;
+	public GameObject waveParticle;
 	public int gridLength = 8;
 	public int gridWidth = 2;
 	public float gridDistance = 2;
@@ -22,7 +22,7 @@ public class WaveGridGenerator : MonoBehaviour {
 			float x = 0;
 			for (int j = 0; j < gridWidth; j++)
 			{
-				grid[i,j] = Instantiate(vehicleParticle, new Vector3(x,0,z),Quaternion.identity) as GameObject;
+				grid[i,j] = Instantiate(waveParticle, new Vector3(x,0,z),Quaternion.identity) as GameObject;
 				grid[i,j].transform.parent = transform;
 				x += gridDistance;
 			}

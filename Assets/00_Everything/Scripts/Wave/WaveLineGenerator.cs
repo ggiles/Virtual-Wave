@@ -4,6 +4,7 @@ using Vectrosity;
 
 public class WaveLineGenerator : MonoBehaviour {
 
+	public bool lines3D;
 	public int totalLines = 4;
 	VectorLine[] waveLines;
 	Vector3[] waveLinesPoints;
@@ -38,7 +39,11 @@ public class WaveLineGenerator : MonoBehaviour {
 				waveLinesPoints[i*2] = transform.position;
 				Vector3 targetPosition = wps.targetObjects[i].position;
 				waveLinesPoints[i*2+1] = targetPosition;
-				waveLines[i].Draw();
+				if (!lines3D) {
+					waveLines[i].Draw();
+				}else{
+					waveLines[i].Draw3D();
+				}
 			}
 		}
 

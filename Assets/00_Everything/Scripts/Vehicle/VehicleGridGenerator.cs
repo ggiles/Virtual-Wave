@@ -8,7 +8,7 @@ public class VehicleGridGenerator : MonoBehaviour {
 	public GameObject vehicleParticleTarget;
 	public int gridLength = 4;
 	public int gridWidth = 2;
-	public int gridHeight = 2;
+	public int gridHeight = 1;
 	public float gridDistance = 2;
 	public int connections = 7;
 	GameObject[,,] grid;
@@ -24,14 +24,14 @@ public class VehicleGridGenerator : MonoBehaviour {
 
 
 		// generate the grid
-		float z = transform.position.z;
+		float z = transform.position.z - (((gridLength-1)*gridDistance)/2);
 		for (int i = 0; i < gridLength; i++)
 		{
-			float x = transform.position.x;
+			float x = transform.position.x - (((gridWidth-1)*gridDistance)/2);
 			for (int j = 0; j < gridWidth; j++)
 			{
-				float y = transform.position.y;
-				for (int k = 0; k < gridWidth; k++)
+				float y = transform.position.y - (gridDistance/2);
+				for (int k = 0; k < gridHeight; k++)
 				{
 					grid[i,j,k] = Instantiate(vehicleParticle, new Vector3(x,y,z),Quaternion.identity) as GameObject;
 					if (makeTargetGrid)
@@ -52,9 +52,12 @@ public class VehicleGridGenerator : MonoBehaviour {
 		{
 			for (int j = 0; j < gridWidth; j++)
 			{
-				for (int k = 0; k < gridWidth; k++)
+				for (int k = 0; k < gridHeight; k++)
 				{
-					VehicleParticleSpring gridPoint = grid[i,j,k].GetComponent<VehicleParticleSpring>();
+					// set the fixed joint rigidbody to the parent
+					grid[i,j,k].GetComponent<FixedJoint>().connectedBody = rigidbody;
+
+					VehicleParticleSpring gridPoint = grid[i,j,k].GetComponent<VehicleParticleSpring>();// get the spring component
 					if (makeTargetGrid)
 					{
 						VehicleParticlePositionSpring positionSpring = grid[i,j,k].GetComponent<VehicleParticlePositionSpring>();
@@ -66,7 +69,7 @@ public class VehicleGridGenerator : MonoBehaviour {
 					{
 						for (int jj = 0; jj < gridWidth; jj++)
 						{
-							for (int kk = 0; kk < gridWidth; kk++)
+							for (int kk = 0; kk < gridHeight; kk++)
 							{
 								if (j != jj || i != ii || k != kk)
 								{

@@ -17,18 +17,18 @@ public class WaveGridMover : MonoBehaviour {
 
 	void FixedUpdate () {
 
-		// DEBUG SHIT
-//		Debug.DrawRay(wgg.grid[0,1].transform.position, Vector3.up);
-
 		float gd = wgg.gridDistance;
 		// if the player has moved more than one grid space
 		if (lastPlayerPos.x - player.position.x >= gd)
 		{
 			Debug.Log ("hit grid distance");
 			lastPlayerPos = new Vector3(Mathf.Round(player.position.x),0,0);
+			// move the grid one grid space forward
 			transform.position -= new Vector3(gd, 0,0);
+			// move the grid data one grid space back
 			MoveHeightData("j");
 		}
+
 	}
 
 	void MoveHeightData (string dimension)

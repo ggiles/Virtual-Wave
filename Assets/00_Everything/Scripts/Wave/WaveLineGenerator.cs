@@ -2,6 +2,8 @@
 using System.Collections;
 using Vectrosity;
 
+[RequireComponent (typeof (WaveParticleSpring))]
+
 public class WaveLineGenerator : MonoBehaviour {
 
 	public bool lines3D;

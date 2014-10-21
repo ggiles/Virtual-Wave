@@ -8,7 +8,7 @@ public class WaveGridGenerator : MonoBehaviour {
 	public int gridLength = 8;
 	public int gridWidth = 2;
 	public float gridDistance = 2;
-	GameObject[,] grid;
+	public GameObject[,] grid;
 
 	void Start () 
 	{

@@ -57,8 +57,6 @@ public class WaveGridMover : MonoBehaviour {
 		if (dimension == "i-" || dimension == "i+")
 			lastPlayerPosZ = Mathf.Round(playerPos);
 
-//		lastPlayerPos = new Vector3(playerPos.x,playerPos.y,playerPos.z);
-
 		// move the grid one grid space forward
 		transform.position += gridDist;
 		// move the grid data one grid space back

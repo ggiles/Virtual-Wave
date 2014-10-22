@@ -51,19 +51,19 @@ public class WaveGenerator : MonoBehaviour {
 			}
 			for (int i = 0; i < wgg.gridLength; i++)
 			{
-				float newY = turbulanceIntensity * Mathf.PerlinNoise(Time.time+5,0);
+				float newY = turbulanceIntensity * Mathf.PerlinNoise(Time.time,0);
 				wgg.grid[i,wgg.gridLength-2].rigidbody.AddForce( new Vector3(0,newY,0));
 				wgg.grid[i,wgg.gridLength-1].rigidbody.AddForce( new Vector3(0,newY,0));
 			}
 			for (int j = 0; j < wgg.gridWidth; j++)
 			{
-				float newY = turbulanceIntensity * Mathf.PerlinNoise(Time.time+8,0);
+				float newY = turbulanceIntensity * Mathf.PerlinNoise(Time.time,0);
 				wgg.grid[0,j].rigidbody.AddForce( new Vector3(0,newY,0));
 				wgg.grid[1,j].rigidbody.AddForce( new Vector3(0,newY,0));
 			}
 			for (int j = 0; j < wgg.gridWidth; j++)
 			{
-				float newY = turbulanceIntensity * Mathf.PerlinNoise(Time.time+15,0);
+				float newY = turbulanceIntensity * Mathf.PerlinNoise(Time.time,0);
 				wgg.grid[wgg.gridWidth-1,j].rigidbody.AddForce( new Vector3(0,newY,0));
 				wgg.grid[wgg.gridWidth-2,j].rigidbody.AddForce( new Vector3(0,newY,0));
 			}

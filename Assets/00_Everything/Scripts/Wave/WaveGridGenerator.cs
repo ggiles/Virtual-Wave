@@ -2,6 +2,9 @@
 using System.Collections;
 using Vectrosity; 
 
+// This is the script that generates the wave grid at the start of the scene
+// many of the other wave components depend on this one
+
 public class WaveGridGenerator : MonoBehaviour {
 
 	public GameObject waveParticle;

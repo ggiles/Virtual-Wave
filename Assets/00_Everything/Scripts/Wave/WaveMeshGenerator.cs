@@ -112,7 +112,8 @@ public class WaveMeshGenerator : MonoBehaviour {
 
 	void RefreshMeshData ()
 	{
-		ret.Clear();
+//		ret.Clear();
+		ret.MarkDynamic();
 		// Generate the mesh object.
 		ret.vertices = unfolded_verts;
 		ret.triangles = tris.ToArray ();

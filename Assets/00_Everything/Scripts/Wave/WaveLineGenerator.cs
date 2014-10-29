@@ -8,6 +8,7 @@ public class WaveLineGenerator : MonoBehaviour {
 
 	public bool lines3D;
 	public int totalLines = 4;
+	public Color lineColor;
 	VectorLine[] waveLines;
 	Vector3[] waveLinesPoints;
 	WaveParticleSpring wps;
@@ -26,7 +27,7 @@ public class WaveLineGenerator : MonoBehaviour {
 				waveLinesPoints[i*2] = transform.position;
 				Vector3 targetPosition = wps.targetObjects[i].position;
 				waveLinesPoints[i*2+1] = targetPosition;
-				waveLines[i] = new VectorLine("MyLine", waveLinesPoints, Color.red, null, 2.0f);
+				waveLines[i] = new VectorLine("MyLine", waveLinesPoints, lineColor	, null, 2.0f);
 			}
 		}
 	}

@@ -243,7 +243,8 @@ function Update () {
 			setVisibility(wiimote,false);
 			var theBalanceBoard = Wii.GetBalanceBoard(whichRemote); 
 			var theCenter = Wii.GetCenterOfBalance(whichRemote);
-			//Debug.Log(theBalanceBoard+" "+theCenter);
+			Debug.Log(theBalanceBoard+" "+theCenter);
+			Debug.Log("the total weight is: k" + Wii.GetTotalWeight(whichRemote));
 			balanceTopLeft.localScale.y     = 1-(.01*theBalanceBoard.y); 
 			balanceTopRight.localScale.y    = 1-(.01*theBalanceBoard.x);
 			balanceBottomLeft.localScale.y  = 1-(.01*theBalanceBoard.w);
@@ -376,7 +377,10 @@ function Update () {
 				
 				inputDisplay = inputDisplay + "\nMotion+ "+motion.ToString("#.0000");
 				inputDisplay = inputDisplay + "\nYAW FAST "+Wii.IsYawFast(whichRemote);
-				inputDisplay = inputDisplay + "\nROLL FAST "+Wii.IsRollFast(whichRemote);				inputDisplay = inputDisplay + "\nPITCH FAST "+Wii.IsPitchFast(whichRemote);				
+				inputDisplay = inputDisplay + "\nROLL FAST "+Wii.IsRollFast(whichRemote);
+				inputDisplay = inputDisplay + "\nPITCH FAST "+Wii.IsPitchFast(whichRemote);
+
+				
 
 			}
 			else

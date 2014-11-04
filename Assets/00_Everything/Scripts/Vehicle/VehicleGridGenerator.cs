@@ -5,18 +5,18 @@ using Vectrosity;
 public class VehicleGridGenerator : MonoBehaviour {
 
 	public GameObject vehicleParticle;
-	public int gridLength = 4;
+	public int gridLength = 2;
 	public int gridWidth = 2;
-	public int gridHeight = 1;
+	public int gridHeight = 2;
 	public float gridDistance = 2;
-	public int connections = 7;
+	private int connections;
 	GameObject[,,] grid;
 
 	void Start () 
 	{
 
 		grid = new GameObject[gridLength,gridWidth,gridHeight]; 
-
+		connections = gridLength + gridWidth + gridHeight - 1;
 		// generate the grid
 		float z = transform.position.z - (((gridLength-1)*gridDistance)/2);
 		for (int i = 0; i < gridLength; i++)
@@ -27,45 +27,21 @@ public class VehicleGridGenerator : MonoBehaviour {
 				float y = transform.position.y - (gridDistance/2);
 				for (int k = 0; k < gridHeight; k++)
 				{
-					grid[i,j,k] = Instantiate(vehicleParticle, new Vector3(x,y,z),Quaternion.identity) as GameObject;
+					grid[i,j,k] = Instantiate(vehicleParticle, new Vector3(x,y,z-gridDistance),Quaternion.identity) as GameObject;
 					grid[i,j,k].transform.parent = transform;
+					// add springs
+					for (int sj = 0; sj < connections; sj++)
+					{
+						grid[i,j,k].AddComponent<SpringJoint>();
+					}
 					y += gridDistance;
 				}
 				x += gridDistance;
 			}
 		
-			z += gridDistance;
+			z += gridDistance * 3f;
 		}
 
-		// link the springs 
-		for (int i = 0; i < gridLength; i++)
-		{
-			for (int j = 0; j < gridWidth; j++)
-			{
-				for (int k = 0; k < gridHeight; k++)
-				{
-					// set the spring joint rigidbody to the parent
-					grid[i,j,k].GetComponent<SpringJoint>().connectedBody = rigidbody;
-
-
-					int index = 0;
-					for (int ii = 0; ii < gridLength; ii++)
-					{
-						for (int jj = 0; jj < gridWidth; jj++)
-						{
-							for (int kk = 0; kk < gridHeight; kk++)
-							{
-								if (j != jj || i != ii || k != kk)
-								{
-									index += 1;
-	//								Debug.Log ("grid["+ii+","+jj+"]");
-								}
-							}
-						}
-					}
-				}
-			}
-		}
 	}
 	
 	void Update ()

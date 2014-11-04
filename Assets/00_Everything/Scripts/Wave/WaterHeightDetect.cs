@@ -1,10 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof (WaterHeightSpring))]
-
 public class WaterHeightDetect : MonoBehaviour {
 
+	public bool useWaterHeightSpring;
 	WaterHeightSpring whs;
 	public Vector3 capsuleDir;
 	public float capsuleCastRadius;
@@ -39,7 +38,8 @@ public class WaterHeightDetect : MonoBehaviour {
 		while (i < hits.Length) {
 			RaycastHit hit = hits[i];
 			// set water height on Water Height Spring
-			whs.waterHeight = hit.transform.position.y;
+			if (useWaterHeightSpring)
+				whs.waterHeight = hit.transform.position.y;
 			// push water down
 			hit.rigidbody.AddForce(0,waterCollideForce,0);
 			avgHeight += hit.transform.position.y;
@@ -54,15 +54,18 @@ public class WaterHeightDetect : MonoBehaviour {
 		if (distanceFromWater > maxAboveWater)
 		{
 			onWaterState = "aboveWater";
-			whs.enabled = false;
+			if (useWaterHeightSpring)
+				whs.enabled = false;
 		} else if (distanceFromWater <= maxAboveWater && distanceFromWater >= maxBelowWater) 
 		{
 			onWaterState = "onWater";
-			whs.enabled = true;
+			if (useWaterHeightSpring)
+				whs.enabled = true;
 		} else if (distanceFromWater < maxBelowWater)
 		{
 			onWaterState = "underWater";
-			whs.enabled = true;
+			if (useWaterHeightSpring)
+				whs.enabled = true;
 		}
 //		Debug.Log (onWaterState);
 	}

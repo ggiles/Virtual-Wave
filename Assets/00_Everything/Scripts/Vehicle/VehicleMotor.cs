@@ -27,7 +27,8 @@ public class VehicleMotor : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		if (whd.onWaterState == "onWater")
+
+		if (whd.onWaterState == "onWater" || whd.onWaterState == "underWater")
 		{
 			Vector3 forceToAdd = new Vector3(0,0,Input.GetAxis("Vertical")*speed);
 			if (Input.GetButtonDown("Jump") == true)

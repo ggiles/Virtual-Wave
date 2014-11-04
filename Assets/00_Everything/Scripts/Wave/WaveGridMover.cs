@@ -3,13 +3,15 @@ using System.Collections;
 
 [RequireComponent (typeof (WaveGridGenerator))]
 
+// this script moves the grid along with you, 
+// while at the same time moving the data within the grid in the opposite way
+
 public class WaveGridMover : MonoBehaviour {
 
 	WaveGridGenerator wgg;
 	public Transform player;
 	public float lastPlayerPosX;
 	public float lastPlayerPosZ;
-
 
 	void Start () 
 	{
@@ -26,24 +28,59 @@ public class WaveGridMover : MonoBehaviour {
 //		Debug.Log (lastPlayerPos.x - player.position.x);
 
 		// if the player has moved more than one grid space
-		if (lastPlayerPosX - player.position.x >= gd)
+		float xDif = lastPlayerPosX - player.position.x;
+		float zDif = lastPlayerPosZ - player.position.z;
+//		Debug.Log ("xDif: " + xDif);
+//		Debug.Log ("zDif: " + zDif);
+
+		if ( xDif >= gd )
 		{
-			MoveGrid(player.position.x, new Vector3(-gd,0,0), "j-");
+
+			if (xDif <= gd)
+				MoveGrid(player.position.x, new Vector3(-gd,0,0), "j-");
+			else
+			{
+				float distanceToMove = -gd * Mathf.Floor(xDif/gd);
+				MoveGrid(player.position.x, new Vector3(distanceToMove,0,0), "j-");
+			}
 		}
 
-		if (lastPlayerPosX - player.position.x <= -gd)
+		if ( xDif <= -gd )
 		{
-			MoveGrid(player.position.x, new Vector3(gd,0,0), "j+");
+
+			if (xDif <= gd)
+				MoveGrid(player.position.x, new Vector3(gd,0,0), "j+");
+			else
+			{
+				float distanceToMove = gd * Mathf.Floor(xDif/gd);
+				MoveGrid(player.position.x, new Vector3(distanceToMove,0,0), "j+");
+			}
 		}
 
-		if (lastPlayerPosZ - player.position.z >= gd)
+		if ( zDif >= gd )
 		{
-			MoveGrid(player.position.z, new Vector3(0,0,-gd), "i-");
+
+			if (zDif <= gd)
+				MoveGrid(player.position.z, new Vector3(-gd,0,0), "i-");
+			else
+			{
+				float distanceToMove = -gd * Mathf.Floor(zDif/gd);
+				MoveGrid(player.position.z, new Vector3(0,0,distanceToMove), "i-");
+			}
 		}
 
-		if (lastPlayerPosZ - player.position.z <= -gd)
+		if ( zDif <= -gd )
 		{
-			MoveGrid(player.position.z, new Vector3(0,0,gd), "i+");
+
+			if (zDif <= gd)
+			{
+				MoveGrid(player.position.z, new Vector3(0,0,gd), "i+");
+			}
+			else
+			{
+				float distanceToMove = gd * Mathf.Floor(zDif/gd);
+				MoveGrid(player.position.z, new Vector3(0,0,distanceToMove), "i+");
+			}
 		}
 
 	}
@@ -106,7 +143,6 @@ public class WaveGridMover : MonoBehaviour {
 			
 			}
 		}
-
 	}
 
 	void SetHeightData (float newY, int i, int j)

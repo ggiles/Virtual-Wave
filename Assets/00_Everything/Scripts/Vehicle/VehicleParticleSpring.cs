@@ -13,6 +13,8 @@ public class VehicleParticleSpring : MonoBehaviour {
 
 
 	void Start () {
+
+		// set the target distance to how far away the target object is from me
    		for (int i = 0; i < targetObjects.Length; i++)
 		{
 			targetDistances[i] = (transform.position - targetObjects[i].position).magnitude;

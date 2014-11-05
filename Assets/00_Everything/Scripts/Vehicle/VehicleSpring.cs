@@ -7,8 +7,7 @@ public class VehicleSpring : MonoBehaviour {
 	private VehicleParticlePhysics p1s;
 	public Transform p2;
 	private VehicleParticlePhysics p2s;
-	private float spring = 0.5f;
-	private float damp = 0.8f;
+	private float spring = 0.05f;
 	public float initDistance;
 
 	void Start ()
@@ -27,14 +26,9 @@ public class VehicleSpring : MonoBehaviour {
 
 		Vector3 force = (newDistance - initDistance) * norm;
 
-		float delta = Time.deltaTime;
-		delta = 1.0f;
+		p1s.velocity -= (force * spring);
 
-		p1s.velocity -= (force * spring) * delta;
-		p1s.velocity *= damp;
-
-		p2s.velocity += (force * spring) * delta;
-		p2s.velocity *= damp;
+		p2s.velocity += (force * spring);
 
 		Debug.DrawLine(p1.position, p2.position, Color.green);
 

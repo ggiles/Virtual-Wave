@@ -15,8 +15,8 @@ public class Vehicle : MonoBehaviour {
 	public VehicleParticlePhysics axisCubeZ;
 	public VehicleParticlePhysics axisCubeC;
 
-	float propForce = 0.5f;
-	float turnForce = 0.25f;
+	float propForce = 0.01f;
+	float turnForce = 0.005f;
 
 
 	void Start ()

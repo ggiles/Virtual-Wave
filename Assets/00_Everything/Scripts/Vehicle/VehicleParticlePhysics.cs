@@ -4,10 +4,9 @@ using System.Collections;
 public class VehicleParticlePhysics : MonoBehaviour {
 	[HideInInspector]
 	public Vector3 velocity;
-	float gravity = -0.6f;
-	float maxDampingForce = 0.5f;
-	float damping = 0.5f;
-	float viscocity = 0.5f;
+	float gravity = -0.5f;
+	float damping = 0.98f;
+	float viscocity = 0.3f;
 	float offsetY = 1.5f;
 	float waterHeight;
 
@@ -19,24 +18,19 @@ public class VehicleParticlePhysics : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		
+
 		transform.position += velocity;
 
-		velocity.y += gravity;
+		velocity.y += gravity * Time.deltaTime;
 
 		float h = transform.position.y - offsetY;
 
 		if (h < waterHeight)
 		{
 			float force = -h * viscocity;
-			velocity.y = force;
+			velocity.y += force * Time.deltaTime;
+			velocity *= damping;
 		}
-
-//		Vector3 dampForce = (velocity * -damping);
-//		dampForce = Vector3.ClampMagnitude(dampForce, maxDampingForce);
-
-//		velocity *= damping;
-
 
 
 	}

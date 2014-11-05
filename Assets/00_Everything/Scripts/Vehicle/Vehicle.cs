@@ -7,13 +7,13 @@ public class Vehicle : MonoBehaviour {
 
 	public Transform[] cubes;
 
-	public VehicleParticleStorage motorCubeL;
-	public VehicleParticleStorage motorCubeR;
+	public VehicleParticlePhysics motorCubeL;
+	public VehicleParticlePhysics motorCubeR;
 
-	public VehicleParticleStorage axisCubeX;
-	public VehicleParticleStorage axisCubeY;
-	public VehicleParticleStorage axisCubeZ;
-	public VehicleParticleStorage axisCubeC;
+	public VehicleParticlePhysics axisCubeX;
+	public VehicleParticlePhysics axisCubeY;
+	public VehicleParticlePhysics axisCubeZ;
+	public VehicleParticlePhysics axisCubeC;
 
 	float propForce = 0.5f;
 	float turnForce = 0.25f;
@@ -65,7 +65,7 @@ public class Vehicle : MonoBehaviour {
 		avgCubePos /= numCubes;
 		jetSki.position = avgCubePos;
 
-		Debug.Log(numCubes);
+//		Debug.Log(numCubes);
 
 		Matrix4x4 mtx = new Matrix4x4();
 	

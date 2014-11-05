@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class VehicleParticleSpring3 : MonoBehaviour {
+public class VehicleSpring : MonoBehaviour {
 
 	public Transform p1;
-	public VehicleParticleStorage p1s;
+	private VehicleParticlePhysics p1s;
 	public Transform p2;
-	public VehicleParticleStorage p2s;
+	private VehicleParticlePhysics p2s;
 	private float spring = 0.5f;
 	private float damp = 0.8f;
 	public float initDistance;
@@ -14,8 +14,8 @@ public class VehicleParticleSpring3 : MonoBehaviour {
 	void Start ()
 	{
 		initDistance = (p1.position - p2.position).magnitude;
-		p1s = p1.gameObject.GetComponent<VehicleParticleStorage>();
-		p2s = p2.gameObject.GetComponent<VehicleParticleStorage>();
+		p1s = p1.gameObject.GetComponent<VehicleParticlePhysics>();
+		p2s = p2.gameObject.GetComponent<VehicleParticlePhysics>();
 
 	}	
 	

@@ -7,8 +7,7 @@ public class VehicleParticlePhysics : MonoBehaviour {
 	float gravity = -0.5f;
 	float damping = 0.98f;
 	float viscocity = 0.3f;
-	float offsetY = 1.5f;
-	float waterHeight;
+	float offsetY = 2.5f;
 
 
 	void Start ()
@@ -25,7 +24,7 @@ public class VehicleParticlePhysics : MonoBehaviour {
 
 		float h = transform.position.y - offsetY;
 
-		if (h < waterHeight)
+		if (h < 0.0f)
 		{
 			float force = -h * viscocity;
 			velocity.y += force * Time.deltaTime;
